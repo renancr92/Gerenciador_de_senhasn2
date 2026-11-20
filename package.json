@@ -1,0 +1,24 @@
+{
+  "name": "gerenciador_de_senhasn2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+  "start": "electron ."
+},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/renancr92/Gerenciador_de_senhasn2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/renancr92/Gerenciador_de_senhasn2/issues"
+  },
+  "homepage": "https://github.com/renancr92/Gerenciador_de_senhasn2#readme",
+  "devDependencies": {
+    "electron": "^45.4.1"
+  }
+}
