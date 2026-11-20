@@ -2,5 +2,7 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('api', {
-    enviarMensagem: (texto) => ipcRenderer.invoke('mensagem-main', texto)
+    carregarSenhas: () => ipcRenderer.invoke('senhas:carregar'),
+
+    salvarSenhas: (senhas) => ipcRenderer.invoke('senhas:salvar', senhas)
 });

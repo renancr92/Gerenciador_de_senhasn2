@@ -2,6 +2,8 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 
+const repositorio = require('./repositorio');
+
 function criarJanela() {
     const janela = new BrowserWindow({
         width: 1000,
@@ -16,8 +18,17 @@ function criarJanela() {
     janela.loadFile(path.join(__dirname, 'src', 'index.html'));
 }
 
-ipcMain.handle('mensagem-main', (event, texto) => {
-    return 'Mensagem recebida pelo Main: ' + texto;
-});
+app.whenReady().then(() => {
+    repositorio.configurarRepositorio(app.getPath('userData'));
 
-app.whenReady().then(criarJanela);
+    ipcMain.handle('senhas:carregar', async () => {
+        return await repositorio.carregarSenhas();
+    });
+
+    ipcMain.handle('senhas:salvar', async (event, senhas) => {
+        await repositorio.salvarSenhas(senhas);
+        return true;
+    });
+
+    criarJanela();
+});
