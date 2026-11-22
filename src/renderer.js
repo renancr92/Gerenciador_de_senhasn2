@@ -1,8 +1,10 @@
+async function carregarSenhas(){
+    try{
+        const senhas = await window.api.carregarSenhas();
 
-async function testarComunicacao() {
-    const resposta = await window.electronAPI.enviarMensagem('Olá, Main!');
-
-    alert(resposta);
+        console.log("Carregar Senhas:", senhas);
+    }catch(erro){
+        console.error("Erro ao carregar as Senhas:", erro);
+    }
 }
-
-testarComunicacao();
+document.addEventListener("DOMContentLoaded", carregarSenhas);

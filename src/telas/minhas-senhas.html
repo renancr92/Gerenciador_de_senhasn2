@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Senhas</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body class="tela-minhas-senhas">
+    <section class="pagina-senhas">
+        <header class="cabecalho-senhas">
+            <h1>Minhas Senhas</h1>
+            <p>Todos os acessos que você salvou no cofre.</p>
+        </header>
+
+        <div class="ferramentas-senhas">
+            <input type="search" id="buscar-senhas" placeholder="Buscar por site usuário...">
+            <button id="adicionar-senha" type="button"> + Adicionar senha</button>
+        </div>
+
+        <div class="tabela-container">
+            <table class="tabela-senhas">
+                <thead>
+                    <tr>
+                        <th>Site / Serviços</th>
+                        <th>Usuário</th>
+                        <th>Senha</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody id="corpo-tabela-senhas">
+                    <tr>
+                        <td colspan="4">
+                            Nenhuma senha cadastrada ainda.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
+
+</html>
