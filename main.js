@@ -19,7 +19,7 @@ function criarJanela() {
 }
 
 app.whenReady().then(() => {
-    repositorio.configurarRepositorio(app.getPath('userData'));
+    repositorio.configurarRepositorio(path.join(__dirname, 'dados'));
 
     ipcMain.handle('senhas:carregar', async () => {
         return await repositorio.carregarSenhas();

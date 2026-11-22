@@ -1,10 +1,605 @@
-body {
-    background-color: #20232a;
-    color: white;
-    font-family: Arial;
-    text-align: center;
-    padding: 50px;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
+
+body {
+    min-height: 100vh;
+    background-color: #f5f6fb;
+    color: #25253a;
+    font-family: Arial, sans-serif;
+    text-align: left;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* ========================================
+   TELA: Principal: index
+======================================== */
+
+#dashboard {
+    min-height: 100vh;
+    display: flex;
+    background-color: #f5f6fb;
+    color: #25253a;
+    font-family: Arial, sans-serif;
+}
+
+/* MENU LATERAL */
+
+#dashboard .sidebar {
+    width: 232px;
+    min-width: 232px;
+    min-height: 100vh;
+    padding: 22px 15px;
+    background-color: #111a30;
+    color: #dce2f1;
+    display: flex;
+    flex-direction: column;
+}
+
+#dashboard .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 43px;
+    padding: 0 5px;
+}
+
+#dashboard .brand-icon {
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    background: linear-gradient(145deg, #8e79f3, #6551d2);
+    color: white;
+}
+
+#dashboard .brand-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+#dashboard .brand-text strong {
+    color: white;
+    font-family: Georgia, serif;
+    font-size: 15px;
+}
+
+#dashboard .brand-text small {
+    color: #8791aa;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+}
+
+#dashboard .menu-label,
+#dashboard .eyebrow {
+    display: block;
+    color: #9299ac;
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: 1.4px;
+}
+
+#dashboard .menu-label {
+    padding: 0 8px;
+    margin-bottom: 12px;
+}
+
+#dashboard .main-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+#dashboard .nav-item {
+    min-height: 42px;
+    padding: 0 11px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-radius: 8px;
+    color: #aeb7ca;
+    font-size: 12px;
+    transition: .2s;
+}
+
+#dashboard .nav-item span {
+    width: 16px;
+    text-align: center;
+    font-size: 16px;
+}
+
+#dashboard .nav-item:hover,
+#dashboard .nav-item.active {
+    background-color: #26334f;
+    color: white;
+}
+
+#dashboard .nav-item.active {
+    box-shadow: inset 2px 0 0 #8a76f1;
+}
+
+#dashboard .security-card {
+    margin-top: auto;
+    padding: 13px 12px;
+    border: 1px solid #293752;
+    border-radius: 10px;
+    background-color: #1a2742;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+}
+
+#dashboard .security-icon {
+    width: 25px;
+    height: 25px;
+    display: grid;
+    place-items: center;
+    border-radius: 7px;
+    color: #55c99d;
+    background-color: #24483f;
+}
+
+#dashboard .security-card strong {
+    color: white;
+    font-size: 10px;
+}
+
+#dashboard .security-card p {
+    color: #9ba7bd;
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+
+/* CONTEÚDO PRINCIPAL */
+
+#dashboard .main-content {
+    width: calc(100% - 232px);
+    padding: 27px 30px 35px;
+}
+
+#dashboard .topbar {
+    min-height: 48px;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+#dashboard .page-heading .eyebrow {
+    margin-bottom: 6px;
+    font-size: 8px;
+}
+
+#dashboard .page-heading h1 {
+    font-family: Georgia, serif;
+    font-size: 23px;
+    font-weight: 600;
+}
+
+#dashboard .topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+#dashboard .connection-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #778095;
+    font-size: 10px;
+}
+
+#dashboard .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #43c99a;
+}
+
+#dashboard .button {
+    min-height: 36px;
+    padding: 0 15px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    font-size: 11px;
+    font-weight: bold;
+    transition: .2s;
+}
+
+#dashboard .button:hover {
+    transform: translateY(-2px);
+}
+
+#dashboard .button-primary {
+    color: white;
+    background-color: #6956d8;
+    box-shadow: 0 4px 10px #6956d82b;
+}
+
+
+/* BANNER */
+
+#dashboard .welcome-banner {
+    min-height: 190px;
+    padding: 30px 34px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 13px;
+    color: white;
+    background: linear-gradient(
+        110deg,
+        #6250c9,
+        #7561e5 62%,
+        #8977ed
+    );
+}
+
+#dashboard .welcome-copy {
+    position: relative;
+    z-index: 2;
+}
+
+#dashboard .banner-eyebrow {
+    color: #e0dcff;
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+#dashboard .welcome-copy h2 {
+    margin: 12px 0 8px;
+    font-family: Georgia, serif;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+#dashboard .welcome-copy p {
+    margin-bottom: 17px;
+    color: #e7e3ff;
+    font-size: 11px;
+}
+
+#dashboard .button-light {
+    min-height: 33px;
+    color: #5144a8;
+    background-color: white;
+}
+
+#dashboard .shield-art {
+    width: 190px;
+    height: 145px;
+    margin-right: 18px;
+    position: relative;
+    display: grid;
+    place-items: center;
+}
+
+#dashboard .shield {
+    width: 68px;
+    height: 78px;
+    padding-top: 23px;
+    clip-path: polygon(
+        50% 0,
+        92% 17%,
+        85% 72%,
+        50% 100%,
+        15% 72%,
+        8% 17%
+    );
+    color: #6555c7;
+    background-color: #eeeaff;
+    text-align: center;
+    font-size: 29px;
+    font-weight: bold;
+}
+
+#dashboard .orbit {
+    width: 165px;
+    height: 75px;
+    position: absolute;
+    border: 1px solid #ffffff30;
+    border-radius: 50%;
+}
+
+#dashboard .orbit-one {
+    transform: rotate(-28deg);
+}
+
+#dashboard .orbit-two {
+    transform: rotate(55deg);
+}
+
+
+/* INDICADORES */
+
+#dashboard .metrics-grid {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+}
+
+#dashboard .metric-card {
+    min-height: 112px;
+    padding: 15px 17px;
+    border: 1px solid #edf0f6;
+    border-radius: 10px;
+    background-color: white;
+}
+
+#dashboard .metric-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #858ca0;
+    font-size: 10px;
+}
+
+#dashboard .metric-icon,
+#dashboard .quick-icon {
+    display: grid;
+    place-items: center;
+    border-radius: 7px;
+    font-weight: bold;
+}
+
+#dashboard .metric-icon {
+    width: 27px;
+    height: 27px;
+    font-size: 13px;
+}
+
+#dashboard .purple {
+    color: #7966dd;
+    background-color: #f0edff;
+}
+
+#dashboard .green {
+    color: #36aa83;
+    background-color: #e8f8f1;
+}
+
+#dashboard .blue {
+    color: #5594c8;
+    background-color: #eaf4fc;
+}
+
+#dashboard .metric-value,
+#dashboard .metric-date {
+    display: block;
+    margin-top: 5px;
+    color: #252a3e;
+    font-family: Georgia, serif;
+    font-size: 23px;
+}
+
+#dashboard .metric-date {
+    margin-top: 9px;
+    font-size: 17px;
+}
+
+#dashboard .metric-card small {
+    display: block;
+    margin-top: 3px;
+    color: #a0a6b5;
+    font-size: 9px;
+}
+
+
+/* ACESSO RÁPIDO */
+
+#dashboard .quick-section {
+    margin-top: 27px;
+}
+
+#dashboard .section-heading {
+    margin-bottom: 13px;
+}
+
+#dashboard .section-heading .eyebrow {
+    margin-bottom: 5px;
+}
+
+#dashboard .section-heading h2 {
+    font-family: Georgia, serif;
+    font-size: 17px;
+}
+
+#dashboard .quick-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+}
+
+#dashboard .quick-card {
+    min-height: 135px;
+    padding: 15px 17px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 1px solid #edf0f6;
+    border-radius: 10px;
+    background-color: white;
+    transition: .2s;
+}
+
+#dashboard .quick-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px #20243a0d;
+}
+
+#dashboard .quick-icon {
+    width: 29px;
+    height: 29px;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+#dashboard .quick-card strong {
+    color: #252a3e;
+    font-size: 11px;
+}
+
+#dashboard .quick-card p {
+    margin-top: 5px;
+    color: #9299aa;
+    font-size: 9px;
+}
+
+#dashboard .card-link {
+    margin-top: auto;
+    padding-top: 10px;
+    color: #6d5bd1;
+    font-size: 9px;
+    font-weight: bold;
+}
+
+
+/* REGISTROS */
+
+#dashboard .records-section {
+    margin-top: 26px;
+}
+
+#dashboard .records-section p {
+    margin-top: 9px;
+    color: #9299aa;
+    font-size: 10px;
+}
+
+#dashboard .records-section a {
+    color: #6d5bd1;
+    font-weight: bold;
+}
+
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 900px) {
+
+    #dashboard .sidebar {
+        width: 205px;
+        min-width: 205px;
+    }
+
+    #dashboard .main-content {
+        width: calc(100% - 205px);
+        padding: 24px 20px;
+    }
+
+    #dashboard .welcome-banner {
+        padding: 25px;
+    }
+
+}
+
+@media (max-width: 680px) {
+
+    #dashboard {
+        display: block;
+    }
+
+    #dashboard .sidebar {
+        width: 100%;
+        min-width: 0;
+        min-height: auto;
+        padding: 13px 15px;
+    }
+
+    #dashboard .brand {
+        margin-bottom: 14px;
+    }
+
+    #dashboard .menu-label,
+    #dashboard .security-card {
+        display: none;
+    }
+
+    #dashboard .main-nav {
+        flex-direction: row;
+        gap: 5px;
+        overflow-x: auto;
+    }
+
+    #dashboard .nav-item {
+        min-width: max-content;
+        min-height: 38px;
+        padding: 0 10px;
+        font-size: 10px;
+    }
+
+    #dashboard .main-content {
+        width: 100%;
+        padding: 22px 15px 30px;
+    }
+
+    #dashboard .topbar {
+        margin-bottom: 18px;
+    }
+
+    #dashboard .connection-status {
+        display: none;
+    }
+
+    #dashboard .welcome-banner {
+        min-height: 175px;
+        padding: 22px;
+    }
+
+    #dashboard .welcome-copy {
+        max-width: 80%;
+    }
+
+    #dashboard .welcome-copy h2 {
+        font-size: 21px;
+    }
+
+    #dashboard .shield-art {
+        width: 90px;
+        position: absolute;
+        right: 0;
+        opacity: .5;
+        transform: scale(.65);
+    }
+
+    #dashboard .metrics-grid,
+    #dashboard .quick-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    #dashboard .metric-card {
+        min-height: 100px;
+    }
+
+    #dashboard .quick-card {
+        min-height: 125px;
+    }
+
+}
+/* ========================================
+   FIM TELA: Principal: index
+======================================== */
+
 
 /* ========================================
    TELA: NOVO CADASTRO
@@ -333,4 +928,22 @@ body {
         flex-direction: column;
     }
 
+}
+/* ========================================
+   FIM TELA: NOVO CADASTRO
+======================================== */
+
+/* BOTÃO VOLTAR PARA A TELA PRINCIPAL */
+
+.voltar-inicio {
+    color: #7660bd;
+    font-size: 13px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: .2s;
+}
+
+.voltar-inicio:hover {
+    color: #563bb1;
+    transform: translateX(-3px);
 }

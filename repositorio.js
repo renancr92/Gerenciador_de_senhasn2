@@ -24,6 +24,8 @@ async function carregarSenhas() {
 async function salvarSenhas(senhas) {
     const dados = JSON.stringify(senhas, null, 2);
 
+    await fs.mkdir(path.dirname(arquivo), { recursive: true });
+
     await fs.writeFile(arquivo, dados, 'utf-8');
 }
 
