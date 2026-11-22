@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Cadastro | SenhaForte</title>
+
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+    <div id="novo-cadastro">
+
+       
+        <header class="cadastro-header">
+
+            <div class="cadastro-header-titulo">
+                <span class="cadastro-label">ÁREA DE TRABALHO</span>
+                <h1>Novo cadastro</h1>
+            </div>
+
+            <div class="cadastro-header-acoes">
+                <span class="cadastro-cofre">
+                    <span class="cadastro-status"></span>
+                    Cofre local
+                </span>
+
+                <button type="button" class="cadastro-btn-nova">
+                    + Nova senha
+                </button>
+            </div>
+
+        </header>
+
+        
+        <main class="cadastro-main">
+
+            <section class="cadastro-introducao">
+
+                <span class="cadastro-label">
+                    ORGANIZE SEUS ACESSOS
+                </span>
+
+                <h2>Novo cadastro</h2>
+
+                <p>
+                    Preencha os dados da conta que deseja guardar.
+                </p>
+
+            </section>
+
+            
+            <form class="cadastro-form">
+
+                <div class="cadastro-grid">
+
+                    
+                    <div class="cadastro-campo">
+
+                        <label for="nomeServico">
+                            Nome do site ou serviço <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="nomeServico"
+                            placeholder="Ex.: Google, Instagram..."
+                            required
+                        >
+
+                    </div>
+
+                   
+                    <div class="cadastro-campo">
+
+                        <label for="categoria">
+                            Categoria
+                        </label>
+
+                        <select id="categoria">
+
+                            <option value="pessoal">Pessoal</option>
+                            <option value="trabalho">Trabalho</option>
+                            <option value="estudos">Estudos</option>
+                            <option value="redes-sociais">Redes sociais</option>
+                            <option value="financeiro">Financeiro</option>
+                            <option value="outros">Outros</option>
+
+                        </select>
+
+                    </div>
+
+                    
+                    <div class="cadastro-campo">
+
+                        <label for="usuario">
+                            Usuário ou e-mail <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="usuario"
+                            placeholder="seuemail@exemplo.com"
+                            required
+                        >
+
+                    </div>
+
+                   
+                    <div class="cadastro-campo">
+
+                        <label for="senha">
+                            Senha <span>*</span>
+                        </label>
+
+                        <div class="cadastro-senha-container">
+
+                            <input
+                                type="password"
+                                id="senha"
+                                placeholder="Digite ou gere uma senha"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="cadastro-btn-olho"
+                                id="mostrarSenha"
+                                aria-label="Mostrar senha"
+                            >
+                                ◉
+                            </button>
+
+                        </div>
+
+                        <button
+                            type="button"
+                            class="cadastro-gerar-senha"
+                        >
+                            ✧ Gerar senha automaticamente
+                        </button>
+
+                    </div>
+
+                </div>
+
+                
+                <div class="cadastro-campo cadastro-observacoes">
+
+                    <label for="observacoes">
+                        Observações <span class="cadastro-opcional">(opcional)</span>
+                    </label>
+
+                    <textarea
+                        id="observacoes"
+                        placeholder="Informações adicionais sobre esta conta..."
+                        rows="3"
+                    ></textarea>
+
+                </div>
+
+               
+                <div class="cadastro-form-footer">
+
+                    <span class="cadastro-obrigatorio">
+                        * Campos obrigatórios
+                    </span>
+
+                    <div class="cadastro-botoes">
+
+                        <button
+                            type="button"
+                            class="cadastro-btn-cancelar"
+                        >
+                            Cancelar
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="cadastro-btn-salvar"
+                        >
+                            Salvar cadastro
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </main>
+
+        
+        <footer class="cadastro-footer">
+
+            <span>SenhaForte&nbsp; • &nbsp;Gerenciador de Senhas</span>
+
+            <span>Seus dados permanecem neste dispositivo.</span>
+
+        </footer>
+
+    </div>
+
+</body>
+</html>
