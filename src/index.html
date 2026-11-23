@@ -1,15 +1,230 @@
+
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Gerenciador de Senhas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SenhaForte | Visão geral</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>Gerenciador de Senhas</h1>
+    <div id="dashboard">
 
-    <p>Senhas fortes</p>
+        <aside class="sidebar">
+
+            <a href="index.html" class="brand">
+                <span class="brand-icon">◆</span>
+
+                <span class="brand-text">
+                    <strong>SenhaForte</strong>
+                    <small>GERENCIADOR</small>
+                </span>
+            </a>
+
+            <span class="menu-label">MENU PRINCIPAL</span>
+
+            <nav class="main-nav">
+
+                <a href="index.html" class="nav-item active">
+                    <span>⌂</span>
+                    Visão geral
+                </a>
+
+                <a href="telas/gerar-senha.html" class="nav-item">
+                    <span>✧</span>
+                    Gerar senha
+                </a>
+
+                <a href="telas/minhas-senhas.html" class="nav-item">
+                    <span>▤</span>
+                    Minhas senhas
+                </a>
+
+                <a href="telas/novo-cadastro.html" class="nav-item">
+                    <span>＋</span>
+                    Novo cadastro
+                </a>
+
+            </nav>
+
+            <div class="security-card">
+                <span class="security-icon">♙</span>
+                <strong>Seus dados protegidos</strong>
+                <p>Suas informações ficam organizadas em um só lugar.</p>
+            </div>
+
+        </aside>
+
+        <main class="main-content">
+
+            <header class="topbar">
+
+                <div class="page-heading">
+                    <span class="eyebrow">ÁREA DE TRABALHO</span>
+                    <h1>Visão geral</h1>
+                </div>
+
+                <div class="topbar-actions">
+
+                    <span class="connection-status">
+                        <span class="status-dot"></span>
+                        Cofre local
+                    </span>
+
+                    <a href="telas/novo-cadastro.html"
+                       class="button button-primary">
+                        + Nova senha
+                    </a>
+
+                </div>
+
+            </header>
+
+            <section class="welcome-banner">
+
+                <div class="welcome-copy">
+
+                    <span class="banner-eyebrow">
+                        BEM-VINDO AO SENHAFORTE
+                    </span>
+
+                    <h2>Suas senhas, em segurança.</h2>
+
+                    <p>
+                        Tenha controle total e mantenha seus acessos
+                        organizados em um só lugar.
+                    </p>
+
+                    <a href="telas/gerar-senha.html"
+                       class="button button-light">
+                        Gerar uma senha →
+                    </a>
+
+                </div>
+
+                <div class="shield-art">
+                    <span class="orbit orbit-one"></span>
+                    <span class="orbit orbit-two"></span>
+                    <span class="shield">✓</span>
+                </div>
+
+            </section>
+
+            <section class="metrics-grid">
+
+                <article class="metric-card">
+
+                    <div class="metric-top">
+                        <span>Total de senhas</span>
+                        <span class="metric-icon purple">▤</span>
+                    </div>
+
+                    <strong class="metric-value" id="metric-total">0</strong>
+
+                    <small>Registros no seu cofre</small>
+
+                </article>
+
+                <article class="metric-card">
+
+                    <div class="metric-top">
+                        <span>Senhas fortes</span>
+                        <span class="metric-icon green">✓</span>
+                    </div>
+
+                    <strong class="metric-value" id="metric-fortes">0</strong>
+
+                    <small>Com 12 ou mais caracteres</small>
+
+                </article>
+
+                <article class="metric-card">
+
+                    <div class="metric-top">
+                        <span>Última atualização</span>
+                        <span class="metric-icon blue">◷</span>
+                    </div>
+
+                    <strong class="metric-date" id="metric-atualizacao">--/--/----</strong>
+
+                    <small>Data do último cadastro</small>
+
+                </article>
+
+            </section>
+
+            <section class="quick-section">
+
+                <div class="section-heading">
+
+                    <span class="eyebrow">ACESSO RÁPIDO</span>
+
+                    <h2>O que deseja fazer?</h2>
+
+                </div>
+
+                <div class="quick-grid">
+
+                    <a href="telas/gerar-senha.html"
+                       class="quick-card">
+
+                        <span class="quick-icon purple">✧</span>
+
+                        <strong>Gerar senha</strong>
+
+                        <p>Crie uma senha aleatória e segura.</p>
+
+                        <span class="card-link">Começar →</span>
+
+                    </a>
+
+                    <a href="telas/minhas-senhas.html"
+                       class="quick-card">
+
+                        <span class="quick-icon blue">▤</span>
+
+                        <strong>Ver minhas senhas</strong>
+
+                        <p>Consulte e organize seus registros.</p>
+
+                        <span class="card-link">Acessar →</span>
+
+                    </a>
+
+                    <a href="telas/novo-cadastro.html"
+                       class="quick-card">
+
+                        <span class="quick-icon green">＋</span>
+
+                        <strong>Adicionar acesso</strong>
+
+                        <p>Cadastre um novo login e senha.</p>
+
+                        <span class="card-link">Cadastrar →</span>
+
+                    </a>
+
+                </div>
+
+            </section>
+
+            <section class="records-section">
+
+                <span class="eyebrow">SEUS REGISTROS</span>
+
+                <p>
+                    Consulte seus acessos cadastrados em
+                    <a href="telas/minhas-senhas.html">Minhas senhas</a>.
+                </p>
+
+            </section>
+
+        </main>
+
+    </div>
+
     <script src="renderer.js"></script>
+
 </body>
 </html>
