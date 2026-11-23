@@ -1,10 +1,109 @@
-async function carregarSenhas(){
-    try{
+
+async function carregarSenhas() {
+    const corpoTabela = document.getElementById("corpo-tabela-senhas");
+
+    if (!corpoTabela) {
+        return;
+    }
+    const campoBusca = document.getElementById("buscar-senhas");
+     
+if (campoBusca) {
+    campoBusca.addEventListener("input", () => {
+
+        const textoDigitado = campoBusca.value.toLowerCase().trim();
+
+        const linhas = Array.from(corpoTabela.querySelectorAll("tr"));
+
+        const encontradas = linhas.filter((linha) => {
+            const colunas = linha.querySelectorAll("td");
+
+            if (colunas.length !== 4) {
+                return true;
+            }
+
+            const site = colunas[0].textContent.toLowerCase();
+            const usuario = colunas[1].textContent.toLowerCase();
+
+            return site.includes(textoDigitado) ||
+                   usuario.includes(textoDigitado);
+        });
+
+        linhas.forEach((linha) => {
+            linha.hidden = true;
+        });
+
+        encontradas.forEach((linha) => {
+            linha.hidden = false;
+        });
+
+    });
+}
+
+    try {
         const senhas = await window.api.carregarSenhas();
 
-        console.log("Carregar Senhas:", senhas);
-    }catch(erro){
-        console.error("Erro ao carregar as Senhas:", erro);
+        corpoTabela.replaceChildren();
+
+        if (senhas.length === 0) {
+            const linha = document.createElement("tr");
+            const celula = document.createElement("td");
+
+            celula.colSpan = 4;
+            celula.textContent = "Nenhuma senha cadastrada ainda.";
+
+            linha.appendChild(celula);
+            corpoTabela.appendChild(linha);
+            return;
+        }
+
+        senhas.forEach((registro) => {
+            const linha = document.createElement("tr");
+
+            const valores = [
+                registro.nomeServico,
+                registro.usuario,
+                "••••••••",
+                "—"
+            ];
+
+            
+valores.forEach((valor, indice) => {
+    const celula = document.createElement("td");
+
+    if (indice === 2) {
+        const textoSenha = document.createElement("span");
+        textoSenha.textContent = "••••••••";
+
+        const botaoMostrar = document.createElement("button");
+        botaoMostrar.type = "button";
+        botaoMostrar.textContent = "Mostrar";
+        botaoMostrar.className = "botao-mostrar-tabela";
+
+        botaoMostrar.addEventListener("click", () => {
+            if (botaoMostrar.textContent === "Mostrar") {
+                textoSenha.textContent = registro.senha;
+                botaoMostrar.textContent = "Ocultar";
+            } else {
+                textoSenha.textContent = "••••••••";
+                botaoMostrar.textContent = "Mostrar";
+            }
+        });
+
+        celula.appendChild(textoSenha);
+        celula.appendChild(botaoMostrar);
+    } else {
+        celula.textContent = valor;
+    }
+
+    linha.appendChild(celula);
+});
+
+
+            corpoTabela.appendChild(linha);
+        });
+
+    } catch (erro) {
+        console.error("Erro ao carregar as senhas:", erro);
     }
 }
 document.addEventListener("DOMContentLoaded", carregarSenhas);

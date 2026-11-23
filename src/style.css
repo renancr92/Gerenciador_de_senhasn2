@@ -88,11 +88,11 @@ body.tela-minhas-senhas {
 /* Mensagem e dados da tabela */
 
 body.tela-minhas-senhas .tabela-senhas tbody td {
-    color: #596579;
+     color: #596579;
     background-color: white;
-    padding: 20px;
+    padding: 18px;
     font-size: 14px;
-    text-align: center;
+    text-align: left;
 }       
 body {
     min-height: 100vh;
@@ -106,6 +106,27 @@ body {
 a {
     text-decoration: none;
     color: inherit;
+}
+
+
+/* Botão mostrar e ocultar senha */
+
+.tela-minhas-senhas .botao-mostrar-tabela {
+    margin-left: 12px;
+    padding: 5px 8px;
+    background-color: transparent;
+    border: none;
+    color: #765ee7;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Efeito ao passar o mouse */
+
+.tela-minhas-senhas .botao-mostrar-tabela:hover {
+    color: #563bb1;
+    text-decoration: underline;
 }
 
 
