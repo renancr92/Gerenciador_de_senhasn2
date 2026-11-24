@@ -130,6 +130,31 @@ a {
 }
 
 
+/* Botões de ações da tela Minhas senhas */
+
+.tela-minhas-senhas .botao-editar-tabela {
+    background-color: #eee9ff;
+    color: #6d4ce4;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin-right: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.tela-minhas-senhas .botao-excluir-tabela {
+    background-color: #ffe8e8;
+    color: #d64545;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
+
 /* ========================================
    TELA: Principal: index
 ======================================== */
