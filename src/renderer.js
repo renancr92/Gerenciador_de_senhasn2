@@ -1,15 +1,207 @@
 
-// FUNCIONALIDADES DO DASHBOARD
+async function carregarSenhas() {
+
+    // 1.1 - Localiza a tabela e verifica se estamos na tela Minhas Senhas.
+    const corpoTabela = document.getElementById("corpo-tabela-senhas");
+    /* =====================================================
+       1. TELA MINHAS SENHAS
+       Responsável por listar, pesquisar, visualizar,
+       editar e excluir as senhas cadastradas.
+       ===================================================== */
+    if (!corpoTabela) {
+        return;
+    }
+
+    // 1.2 - Faz o botão Adicionar Senha abrir o formulário de novo cadastro.
+    const botaoAdicionar = document.getElementById("adicionar-senha");
+
+    if (botaoAdicionar) {
+        botaoAdicionar.addEventListener("click", () => {
+            window.location.href = "novo-cadastro.html";
+        });
+    }
+
+    // 1.3 - Pesquisa os registros pelo nome do site ou pelo usuário.
+    const campoBusca = document.getElementById("buscar-senhas");
+
+    if (campoBusca) {
+        campoBusca.addEventListener("input", () => {
+
+            const textoDigitado = campoBusca.value.toLowerCase().trim();
+
+            const linhas = Array.from(corpoTabela.querySelectorAll("tr"));
+
+            const encontradas = linhas.filter((linha) => {
+                const colunas = linha.querySelectorAll("td");
+
+                if (colunas.length !== 4) {
+                    return true;
+                }
+
+                const site = colunas[0].textContent.toLowerCase();
+                const usuario = colunas[1].textContent.toLowerCase();
+
+                return site.includes(textoDigitado) ||
+                    usuario.includes(textoDigitado);
+            });
+
+            linhas.forEach((linha) => {
+                linha.hidden = true;
+            });
+
+            encontradas.forEach((linha) => {
+                linha.hidden = false;
+            });
+
+        });
+    }
+
+    // 1.4 - Carrega os registros salvos no JSON e prepara a tabela para exibi-los.
+    try {
+        const senhas = await window.api.carregarSenhas();
+
+        corpoTabela.replaceChildren();
+
+        // 1.5 - Mostra uma mensagem quando não existem senhas cadastradas.
+        if (senhas.length === 0) {
+            const linha = document.createElement("tr");
+            const celula = document.createElement("td");
+
+            celula.colSpan = 4;
+            celula.textContent = "Nenhuma senha cadastrada ainda.";
+
+            linha.appendChild(celula);
+            corpoTabela.appendChild(linha);
+            return;
+        }
+
+        // 1.6 - Percorre as senhas cadastradas e cria uma linha para cada registro.
+        senhas.forEach((registro, indiceRegistro) => {
+            const linha = document.createElement("tr");
+
+            const valores = [
+                registro.nomeServico,
+                registro.usuario,
+                "••••••••",
+                "—"
+            ];
+
+
+            valores.forEach((valor, indice) => {
+                const celula = document.createElement("td");
+
+                // 1.7 - Permite mostrar ou ocultar a senha de cada registro.
+                if (indice === 2) {
+                    const textoSenha = document.createElement("span");
+                    textoSenha.textContent = "••••••••";
+
+                    const botaoMostrar = document.createElement("button");
+                    botaoMostrar.type = "button";
+                    botaoMostrar.textContent = "Mostrar";
+                    botaoMostrar.className = "botao-mostrar-tabela";
+
+                    botaoMostrar.addEventListener("click", () => {
+                        if (botaoMostrar.textContent === "Mostrar") {
+                            textoSenha.textContent = registro.senha;
+                            botaoMostrar.textContent = "Ocultar";
+                        } else {
+                            textoSenha.textContent = "••••••••";
+                            botaoMostrar.textContent = "Mostrar";
+                        }
+                    });
+
+                    celula.appendChild(textoSenha);
+                    celula.appendChild(botaoMostrar);
+
+
+                } else if (indice === 3) {
+
+                    // 1.8 - Cria o botão Editar e abre o formulário do registro selecionado.
+                    const botaoEditar = document.createElement("button");
+
+                    botaoEditar.type = "button";
+                    botaoEditar.textContent = "Editar";
+                    botaoEditar.className = "botao-editar-tabela";
+
+
+                    botaoEditar.addEventListener("click", () => {
+                        window.location.href = "novo-cadastro.html?editar=" + indiceRegistro;
+                    });
+
+
+
+
+                    celula.appendChild(botaoEditar);
+
+                    // 1.9 - Cria o botão Excluir e solicita confirmação antes de apagar o registro.
+                    const botaoExcluir = document.createElement("button");
+
+                    botaoExcluir.type = "button";
+                    botaoExcluir.textContent = "Excluir";
+                    botaoExcluir.className = "botao-excluir-tabela";
+
+
+                    botaoExcluir.addEventListener("click", async () => {
+                        try {
+                            const excluiu = await window.api.excluirSenha(indiceRegistro);
+
+                            if (excluiu) {
+                                window.location.reload();
+                            }
+
+                        } catch (erro) {
+                            console.error("Erro ao excluir registro:", erro);
+                            alert("Não foi possível excluir o registro.");
+                        }
+                    });
+
+
+                    celula.appendChild(botaoExcluir);
+
+
+                } else {
+                    celula.textContent = valor;
+                }
+
+
+                linha.appendChild(celula);
+            });
+
+
+            corpoTabela.appendChild(linha);
+        });
+
+    } catch (erro) {
+        // 1.10 - Registra possíveis erros durante o carregamento das senhas.
+        console.error("Erro ao carregar as senhas:", erro);
+    }
+}
+document.addEventListener("DOMContentLoaded", carregarSenhas);
+/* =====================================================
+   1. TELA MINHAS SENHAS FIM
+   ===================================================== */
+
+// funcionalidades novo cadastro
+
+/* =====================================================
+   2. DASHBOARD - VISÃO GERAL
+   Responsável por atualizar os indicadores da
+   página principal do SenhaForte.
+   ===================================================== */
 
 async function atualizarDashboard() {
+
+    // 2.1 - Localiza os indicadores de total de senhas, senhas fortes e última atualização.
     const metricTotal = document.getElementById('metric-total');
     const metricFortes = document.getElementById('metric-fortes');
     const metricAtualizacao = document.getElementById('metric-atualizacao');
 
+    // 2.2 - Verifica se os indicadores existem antes de atualizar o Dashboard.
     if (!metricTotal && !metricFortes && !metricAtualizacao) {
         return;
     }
 
+    // 2.3 - Carrega as senhas salvas e calcula os indicadores do Dashboard.
     try {
         const senhas = await window.api.carregarSenhas();
 
@@ -21,6 +213,7 @@ async function atualizarDashboard() {
             registro.senha && registro.senha.length >= 12
         ).length;
 
+        // 2.4 - Atualiza os cartões com o total de senhas e a quantidade de senhas fortes.
         if (metricTotal) {
             metricTotal.textContent = total;
         }
@@ -29,6 +222,7 @@ async function atualizarDashboard() {
             metricFortes.textContent = fortes;
         }
 
+        // 2.5 - Busca a data mais recente e atualiza o cartão de última atualização.
         if (metricAtualizacao) {
             const ultimaAtualizacao = registros
                 .filter(registro => registro.dataAtualizacao)
@@ -39,24 +233,73 @@ async function atualizarDashboard() {
             if (ultimaAtualizacao) {
                 metricAtualizacao.textContent =
                     new Date(ultimaAtualizacao.dataAtualizacao)
-                    .toLocaleDateString('pt-BR');
+                        .toLocaleDateString('pt-BR');
             } else {
                 metricAtualizacao.textContent = 'Sem registros';
             }
         }
 
     } catch (erro) {
+
+        // 2.6 - Registra possíveis erros durante a atualização do Dashboard.
         console.error('Erro ao atualizar dashboard:', erro);
     }
 }
 
-// FUNCIONALIDADES DO NOVO CADASTRO
+
+/* =====================================================
+   3. NOVO CADASTRO E EDIÇÃO DE SENHAS
+   Responsável por preencher o formulário, cadastrar,
+   editar e salvar os registros de senhas.
+   ===================================================== */
 
 const campoSenha = document.getElementById('senha');
 const botaoMostrarSenha = document.getElementById('mostrarSenha');
+
+// 3.1 - Localiza o formulário e identifica se é um novo cadastro ou uma edição.
 const formulario = document.querySelector('.cadastro-form');
+
+const parametros = new URLSearchParams(window.location.search);
+const indiceEdicaoTexto = parametros.get("editar");
+const indiceEdicao = indiceEdicaoTexto === null
+    ? null
+    : Number(indiceEdicaoTexto);
+
 const botaoCancelar = document.querySelector('.cadastro-btn-cancelar');
 
+// 3.2 - Carrega os dados do registro selecionado e preenche o formulário para edição.
+if (formulario && indiceEdicao !== null) {
+    async function preencherFormularioEdicao() {
+        try {
+            const senhas = await window.api.carregarSenhas();
+
+            if (!Number.isInteger(indiceEdicao) ||
+                indiceEdicao < 0 ||
+                indiceEdicao >= senhas.length) {
+                alert("Registro não encontrado.");
+                return;
+            }
+
+            const registro = senhas[indiceEdicao];
+
+            document.getElementById("nomeServico").value = registro.nomeServico ?? "";
+            document.getElementById("categoria").value = registro.categoria ?? "pessoal";
+            document.getElementById("usuario").value = registro.usuario ?? "";
+            campoSenha.value = registro.senha ?? "";
+            document.getElementById("observacoes").value = registro.observacoes ?? "";
+
+            formulario.querySelector(".cadastro-btn-salvar").textContent = "Salvar alterações";
+
+        } catch (erro) {
+            console.error("Erro ao carregar registro para edição:", erro);
+            alert("Não foi possível carregar o cadastro.");
+        }
+    }
+
+    preencherFormularioEdicao();
+}
+
+// 3.3 - Permite mostrar ou ocultar a senha digitada no formulário.
 if (botaoMostrarSenha && campoSenha) {
 
     botaoMostrarSenha.addEventListener('click', () => {
@@ -71,18 +314,15 @@ if (botaoMostrarSenha && campoSenha) {
 
 }
 
-if (botaoCancelar && formulario && campoSenha) {
-
-    botaoCancelar.addEventListener('click', () => {
-
-        formulario.reset();
-
-        campoSenha.type = 'password';
-
+// 3.4 - Faz o botão Cancelar voltar para Minhas Senhas sem salvar alterações.
+if (botaoCancelar && formulario) {
+    botaoCancelar.addEventListener("click", () => {
+        window.location.href = "minhas-senhas.html";
     });
-
 }
 
+
+// 3.5 - Controla o envio do formulário para cadastrar ou atualizar uma senha.
 if (formulario && campoSenha) {
 
     formulario.addEventListener('submit', async (evento) => {
@@ -94,11 +334,13 @@ if (formulario && campoSenha) {
         const senha = campoSenha.value.trim();
         const observacoes = document.getElementById('observacoes').value.trim();
 
+        // 3.6 - Verifica se os campos obrigatórios foram preenchidos antes de salvar.
         if (!nomeServico || !usuario || !senha) {
             alert('Preencha todos os campos obrigatórios.');
             return;
         }
 
+        // 3.7 - Organiza os dados preenchidos em um objeto para salvar no JSON.
         const novoCadastro = {
             nomeServico,
             categoria,
@@ -109,18 +351,49 @@ if (formulario && campoSenha) {
         };
 
         try {
+
             const senhas = await window.api.carregarSenhas();
 
-            senhas.push(novoCadastro);
+            // 3.8 - Verifica se deve atualizar um registro existente ou cadastrar uma nova senha.
+            if (indiceEdicao !== null) {
+                if (
+                    !Number.isInteger(indiceEdicao) ||
+                    indiceEdicao < 0 ||
+                    indiceEdicao >= senhas.length
+                ) {
+                    alert("Registro não encontrado para edição.");
+                    return;
+                }
 
+                senhas[indiceEdicao] = {
+                    ...senhas[indiceEdicao],
+                    ...novoCadastro
+                };
+
+            } else {
+                senhas.push(novoCadastro);
+            }
+
+
+            // 3.9 - Salva a lista atualizada de senhas no arquivo JSON.
             await window.api.salvarSenhas(senhas);
 
-            alert('Cadastro salvo com sucesso!');
+            // 3.10 - Mostra a mensagem de sucesso e retorna à listagem após uma edição.
+            if (indiceEdicao !== null) {
+                alert("Cadastro atualizado com sucesso!");
+                window.location.href = "minhas-senhas.html";
+                return;
+            }
+
+            alert("Cadastro salvo com sucesso!");
 
             formulario.reset();
-            campoSenha.type = 'password';
+            campoSenha.type = "password";
+
 
         } catch (erro) {
+
+            // 3.11 - Registra erros e avisa o usuário caso não seja possível salvar.
             console.error(erro);
             alert('Erro ao salvar o cadastro.');
         }
@@ -128,7 +401,7 @@ if (formulario && campoSenha) {
 
 }
 
-// ATUALIZAR DASHBOARD AO ABRIR A PÁGINA
 
+// Inicialização: executa a atualização dos indicadores ao carregar a página.
 atualizarDashboard();
 

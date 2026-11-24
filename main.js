@@ -70,7 +70,9 @@ function criarMenu() {
 
 app.whenReady().then(() => {
 
-    repositorio.configurarRepositorio(path.join(__dirname, 'dados'));
+
+    repositorio.configurarRepositorio(app.getPath('userData'));
+
 
     ipcMain.handle('senhas:carregar', async () => {
         return await repositorio.carregarSenhas();
@@ -80,6 +82,42 @@ app.whenReady().then(() => {
         await repositorio.salvarSenhas(senhas);
         return true;
     });
+
+
+    ipcMain.handle('senhas:excluir', async (event, indiceRegistro) => {
+        const senhas = await repositorio.carregarSenhas();
+
+        if (
+            !Number.isInteger(indiceRegistro) ||
+            indiceRegistro < 0 ||
+            indiceRegistro >= senhas.length
+        ) {
+            return false;
+        }
+
+        const registro = senhas[indiceRegistro];
+
+        const resultado = await dialog.showMessageBox(janelaPrincipal, {
+            type: 'warning',
+            title: 'Confirmar exclusão',
+            message: `Deseja excluir a senha de "${registro.nomeServico}"?`,
+            detail: 'Esta ação não poderá ser desfeita.',
+            buttons: ['Cancelar', 'Excluir'],
+            defaultId: 0,
+            cancelId: 0
+        });
+
+        if (resultado.response !== 1) {
+            return false;
+        }
+
+        senhas.splice(indiceRegistro, 1);
+
+        await repositorio.salvarSenhas(senhas);
+
+        return true;
+    });
+
 
     criarJanela();
     criarMenu();

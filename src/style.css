@@ -4,6 +4,96 @@
     padding: 0;
 }
 
+body.tela-minhas-senhas {
+    background-color: #f5f6fa;
+    color: #1b253d;
+    font-family: Arial, sans-serif;
+    padding: 40px;
+    margin: 0;
+    text-align: left;
+}
+
+
+/* --- Barra de ferramentas da tela Minhas Senhas --- */
+
+.tela-minhas-senhas .ferramentas-senhas {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+/* Campo de pesquisa */
+
+.tela-minhas-senhas #buscar-senhas {
+    width: 350px;
+    max-width: 100%;
+    padding: 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+/* Botão adicionar senha */
+
+.tela-minhas-senhas #adicionar-senha {
+    background-color: #765ee7;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+
+/* Correção dos textos da tela */
+
+.tela-minhas-senhas .cabecalho-senhas h1 {
+    color: #1b253d;
+    text-align: left;
+}
+
+.tela-minhas-senhas .cabecalho-senhas p {
+    color: #8b93a5;
+    text-align: left;
+}
+
+
+/* Tabela da tela Minhas Senhas */
+
+.tela-minhas-senhas .tabela-container {
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+}
+
+.tela-minhas-senhas .tabela-senhas {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tela-minhas-senhas .tabela-senhas th {
+    color: #8b93a5;
+    text-align: left;
+    padding: 18px;
+    font-size: 12px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+
+/* Mensagem e dados da tabela */
+
+body.tela-minhas-senhas .tabela-senhas tbody td {
+     color: #596579;
+    background-color: white;
+    padding: 18px;
+    font-size: 14px;
+    text-align: left;
+}       
 body {
     min-height: 100vh;
     background-color: #f5f6fb;
@@ -17,6 +107,52 @@ a {
     text-decoration: none;
     color: inherit;
 }
+
+
+/* Botão mostrar e ocultar senha */
+
+.tela-minhas-senhas .botao-mostrar-tabela {
+    margin-left: 12px;
+    padding: 5px 8px;
+    background-color: transparent;
+    border: none;
+    color: #765ee7;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Efeito ao passar o mouse */
+
+.tela-minhas-senhas .botao-mostrar-tabela:hover {
+    color: #563bb1;
+    text-decoration: underline;
+}
+
+
+/* Botões de ações da tela Minhas senhas */
+
+.tela-minhas-senhas .botao-editar-tabela {
+    background-color: #eee9ff;
+    color: #6d4ce4;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin-right: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.tela-minhas-senhas .botao-excluir-tabela {
+    background-color: #ffe8e8;
+    color: #d64545;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
 
 
 /* ========================================
