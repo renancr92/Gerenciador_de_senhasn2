@@ -401,6 +401,107 @@ if (formulario && campoSenha) {
 
 }
 
+/* =====================================================
+   3. GERADOR DE SENHAS
+   Responsável por preencher o formulário, cadastrar,
+   editar e salvar os registros de senhas.
+   ===================================================== */
+
+const inputTamanho = document.getElementById('tamanho');
+const valorTamanho = document.getElementById('valorTamanho');
+const campoSenhaGerada = document.getElementById('senhaGerada');
+const botaoGerarSenha = document.getElementById('btnGerar');
+const botaoCopiarSenha = document.getElementById('btnCopiar');
+const barraForca = document.getElementById('barraForca');
+const textoForca = document.getElementById('textoForca');
+
+if (inputTamanho && campoSenhaGerada && botaoGerarSenha) {
+
+    function atualizarForcaSenha(senha) {
+        if (!barraForca || !textoForca) return;
+
+        let pontos = 0;
+
+        if (senha.length >= 8) pontos += 1;
+        if (senha.length >= 12) pontos += 1;
+        if (/[A-Z]/.test(senha)) pontos += 1;
+        if (/[a-z]/.test(senha)) pontos += 1;
+        if (/[0-9]/.test(senha)) pontos += 1;
+        if (/[^A-Za-z0-9]/.test(senha)) pontos += 1;
+
+        if (senha.length < 6 || pontos <= 2) {
+            barraForca.style.width = '25%';
+            barraForca.style.backgroundColor = '#ef4444';
+            textoForca.textContent = 'Fraca';
+            textoForca.style.color = '#ef4444';
+        } else if (pontos <= 4) {
+            barraForca.style.width = '60%';
+            barraForca.style.backgroundColor = '#f59e0b';
+            textoForca.textContent = 'Média';
+            textoForca.style.color = '#d97706';
+        } else if (pontos === 5) {
+            barraForca.style.width = '85%';
+            barraForca.style.backgroundColor = '#10b981';
+            textoForca.textContent = 'Forte';
+            textoForca.style.color = '#059669';
+        } else {
+            barraForca.style.width = '100%';
+            barraForca.style.backgroundColor = '#5b46f6';
+            textoForca.textContent = 'Muito forte';
+            textoForca.style.color = '#5b46f6';
+        }
+    }
+
+    function gerarSenha() {
+        const tamanho = Math.min(16, Math.max(4, Number(inputTamanho.value)));
+
+        let caracteres = '';
+        if (document.getElementById('maiusculas')?.checked) caracteres += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        if (document.getElementById('minusculas')?.checked) caracteres += 'abcdefghijklmnopqrstuvwxyz';
+        if (document.getElementById('numeros')?.checked) caracteres += '0123456789';
+        if (document.getElementById('simbolos')?.checked) caracteres += '!@#$%^&*()_+-=[]{}|;:,.<>?';
+
+        if (!caracteres) {
+            alert('Selecione pelo menos uma opção de caractere.');
+            return;
+        }
+
+        let senha = '';
+        for (let i = 0; i < tamanho; i++) {
+            const indice = Math.floor(Math.random() * caracteres.length);
+            senha += caracteres[indice];
+        }
+
+        campoSenhaGerada.value = senha;
+        atualizarForcaSenha(senha);
+    }
+
+    inputTamanho.addEventListener('input', () => {
+        if (valorTamanho) {
+            valorTamanho.textContent = inputTamanho.value;
+        }
+        gerarSenha();
+    });
+
+    ['maiusculas', 'minusculas', 'numeros', 'simbolos'].forEach((id) => {
+        const checkbox = document.getElementById(id);
+        if (checkbox) {
+            checkbox.addEventListener('change', gerarSenha);
+        }
+    });
+
+    botaoGerarSenha.addEventListener('click', gerarSenha);
+
+    if (botaoCopiarSenha) {
+        botaoCopiarSenha.addEventListener('click', () => {
+            if (!campoSenhaGerada.value) return;
+            navigator.clipboard.writeText(campoSenhaGerada.value);
+            alert('Senha copiada para a área de transferência!');
+        });
+    }
+
+    gerarSenha();
+}
 
 // Inicialização: executa a atualização dos indicadores ao carregar a página.
 atualizarDashboard();

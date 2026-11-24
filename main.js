@@ -21,6 +21,7 @@ function criarJanela() {
 
 function criarMenu() {
     const modeloMenu = [
+
         {
             label: 'Arquivo',
             submenu: [
@@ -42,6 +43,21 @@ function criarMenu() {
                     click: () => {
                         janelaPrincipal.close();
                     }
+                }
+            ]
+        },
+        {
+            label: 'Exibir',
+            submenu: [
+                {
+                    label: 'Ferramentas do desenvolvedor',
+                    role: 'toggleDevTools',
+                    accelerator: 'F12'
+                },
+                {
+                    label: 'Recarregar',
+                    role: 'reload',
+                    accelerator: 'CmdOrCtrl+R'
                 }
             ]
         },

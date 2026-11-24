@@ -1,14 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Gerar Senha | SenhaForte</title>
+
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <a href="../index.html" class="voltar-inicio">
-    ← Voltar para visão geral
-</a>
-    
+
+    <div id="novo-cadastro">
+
+        <header class="cadastro-header">
+
+            <a href="../index.html" class="voltar-inicio">
+                ← Voltar para visão geral
+            </a>
+
+            <div class="cadastro-header-titulo">
+                <span class="cadastro-label">ÁREA DE TRABALHO</span>
+                <h1>Gerar senha</h1>
+            </div>
+
+            <div class="cadastro-header-acoes">
+                <span class="cadastro-cofre">
+                    <span class="cadastro-status"></span>
+                    Cofre local
+                </span>
+
+                <a href="novo-cadastro.html" class="cadastro-btn-nova">
+                    + Nova senha
+                </a>
+            </div>
+
+        </header>
+
+        <main class="cadastro-main">
+
+            <div class="gerador-card">
+                <h2 class="gerador-titulo">Gerador de Senhas</h2>
+                <p class="gerador-subtitulo">Configure os critérios abaixo para criar uma senha segura (até 16 caracteres).</p>
+
+                <div class="gerador-grupo">
+                    <label for="tamanho" class="gerador-label">
+                        Tamanho da senha: <strong id="valorTamanho">12</strong> caracteres
+                    </label>
+                    <input type="range" id="tamanho" class="gerador-range" min="4" max="16" value="12">
+                </div>
+
+                <div class="gerador-opcoes">
+                    <label class="gerador-checkbox-label">
+                        <input type="checkbox" id="maiusculas" checked> Letras maiúsculas (A-Z)
+                    </label>
+                    <label class="gerador-checkbox-label">
+                        <input type="checkbox" id="minusculas" checked> Letras minúsculas (a-z)
+                    </label>
+                    <label class="gerador-checkbox-label">
+                        <input type="checkbox" id="numeros" checked> Números (0-9)
+                    </label>
+                    <label class="gerador-checkbox-label">
+                        <input type="checkbox" id="simbolos" checked> Símbolos (!@#$%)
+                    </label>
+                </div>
+
+                <div class="gerador-resultado-box">
+                    <input type="text" id="senhaGerada" class="gerador-input" readonly placeholder="Clique em gerar...">
+                    <button type="button" id="btnCopiar" class="cadastro-btn-cancelar gerador-btn-copiar">
+                        Copiar
+                    </button>
+                </div>
+
+                <div class="gerador-forca-box">
+                    <div class="gerador-forca-cabecalho">
+                        <span class="gerador-forca-texto-label">Força da senha:</span>
+                        <strong id="textoForca">-</strong>
+                    </div>
+                    <div class="gerador-barra-trilha">
+                        <div id="barraForca" class="gerador-barra-progresso"></div>
+                    </div>
+                </div>
+
+                <div class="gerador-acoes">
+                    <button type="button" id="btnGerar" class="gerador-btn-gerar">
+                        Gerar nova senha
+                    </button>
+                </div>
+            </div>
+
+        </main>
+
+        <footer class="cadastro-footer">
+
+            <span>SenhaForte&nbsp; • &nbsp;Gerenciador de Senhas</span>
+
+            <span>Seus dados permanecem neste dispositivo.</span>
+
+        </footer>
+
+    </div>
+
+    <script src="../renderer.js"></script>
 </body>
 </html>
